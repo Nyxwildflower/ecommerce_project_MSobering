@@ -95,3 +95,5 @@ province_table_data.each do |province|
                    gst:  gst,
                    hst:  hst)
 end
+
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

@@ -26,6 +26,15 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+# Control product listings through Active Admin.
+gem "activeadmin"
+
+# Control user and admin authentication.
+gem "devise"
+
+# Use SASS variables to style the Active Admin dashboard and make specific changes to the Bulma styles.
+gem "sassc-rails"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
