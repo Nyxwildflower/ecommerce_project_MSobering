@@ -1,16 +1,18 @@
 class Product < ApplicationRecord
+  has_one_attached :image
+
   has_and_belongs_to_many :categories
-  accepts_nested_attributes_for :categories, allow_destroy: true
+  accepts_nested_attributes_for :categories, :image_attachment, :image_blob, allow_destroy: true
   has_many :order_items
   has_many :orders, through: :order_items
 
   # Define the attributes and associations that active admin can search.
   def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "description", "id", "id_value", "name", "on_sale", "price", "stock_quantity", "updated_at"]
+    ["image_record_id", "image_blob_id", "description", "id", "id_value", "name", "on_sale", "price", "stock_quantity", "created_at", "updated_at"]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["categories", "order_items", "orders"]
+    ["image_attachment", "image_blob", "categories", "order_items", "orders"]
   end
 
   validates :name, uniqueness: true

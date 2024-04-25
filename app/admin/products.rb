@@ -1,6 +1,9 @@
 ActiveAdmin.register Product do
   permit_params :name, :description, :price, :stock_quantity, :on_sale, categories_attributes: [:id, :name, :_destroy]
 
+  preserve_default_filters!
+  remove_filter :image_attachment, :image_blob
+
   index do |product|
     selectable_column
     column :name
