@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   has_one_attached :image do |attachable|
     attachable.variant :admin_display, resize_to_limit: [100, 200], quality: 100
-    attachable.variant :small_display, resize_and_pad [400, 400, background: [255, 255, 255]], quality: 100
+    attachable.variant :small_display, resize_and_pad: [400, 400, background: [255, 255, 255]], quality: 100
   end
 
   has_and_belongs_to_many :categories
