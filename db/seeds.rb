@@ -10,7 +10,7 @@ Order.destroy_all
 Customer.destroy_all
 Province.destroy_all
 
-# Total time to run: 0.0599 minutes.
+# Total time to run: ~0.5 minutes.
 
 # I couldn't find any type of limiting option for requests to the API.
 api_urls = ["https://api.nookipedia.com/nh/fish",
@@ -51,11 +51,11 @@ api_urls.each do |url|
   # Limit the amount of creatures registered through a take method.
   data_creatures.take(34).each do |creature|
     # Populate Products. The api prices are slightly ridiculous in a real life case.
-    new_product = Product.find_or_create_by!(name: creature["name"],
-                                             description: creature["catchphrases"][0],
-                                             price: creature["sell_nook"] / 10,
+    new_product = Product.find_or_create_by!(name:           creature["name"].capitalize,
+                                             description:    creature["catchphrases"][0],
+                                             price:          creature["sell_nook"] / 10,
                                              stock_quantity: rand(1..10),
-                                             on_sale: rand(11) < 1)
+                                             on_sale:        rand(11) < 1)
 
     # Associate the product with both of its categories.
     new_product.categories << main_category
@@ -66,6 +66,13 @@ api_urls.each do |url|
       rarity_category = create_category(creature["rarity"])
       new_product.categories << rarity_category
     end
+
+    # Find and assign each image
+    image_url = creature["render_url"]
+    uri = URI.parse(image_url)
+    image = URI.open(uri)
+
+    new_product.image.attach(io: image, filename: File.basename(image_url, ".png"), content_type: "image/png")
   end
 end
 
