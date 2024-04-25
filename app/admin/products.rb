@@ -1,5 +1,5 @@
 ActiveAdmin.register Product do
-  permit_params :name, :description, :price, :stock_quantity, :on_sale, categories_attributes: [:id, :name, :_destroy]
+  permit_params :name, :description, :price, :stock_quantity, :on_sale, :image, categories_attributes: [:id, :name, :_destroy]
 
   preserve_default_filters!
   remove_filter :image_attachment, :image_blob
@@ -27,6 +27,11 @@ ActiveAdmin.register Product do
       row :categories do |product|
         product.categories.map { |pr| pr.name }.join(", ").html_safe
       end
+      if product.image.attached?
+        row :image do |product|
+          image_tag url_for(product.image.variant(:admin_display))
+        end
+      end
     end
   end
 
@@ -35,10 +40,17 @@ ActiveAdmin.register Product do
 
     f.inputs "Product" do
       f.inputs
-      # THIS ISNT ALLOWING FOR ADDING EXISTING CATEGORIES
-      f.has_many :categories, allow_destroy: true do |n_f|
-        n_f.input :name
+      f.inputs "Add an image:" do
+        if f.product.image.attached?
+          f.input :image, :as => :file, :hint => image_tag(f.product.image.variant(:admin_display))
+        else
+          f.input :image, :as => :file
+        end
       end
+      # THIS ISNT ALLOWING FOR ADDING EXISTING CATEGORIES
+      # f.has_many :categories, allow_destroy: true do |n_f|
+      #   n_f.input :name
+      # end
 
       # f.inputs :categories, :as => :select
       # f.inputs :name, :for => :category, :name => "Category"
