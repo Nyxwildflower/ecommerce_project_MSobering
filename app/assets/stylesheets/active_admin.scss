@@ -27,6 +27,13 @@ body {
   font-size: 1rem;
 }
 
+a.product-card-link:link{
+  text-decoration: none;
+}
+
+a.product-card-link:hover {
+  opacity: 0.7;
+}
 // div#header {
 //   background-color: $primary;
 //   background-image: none;
