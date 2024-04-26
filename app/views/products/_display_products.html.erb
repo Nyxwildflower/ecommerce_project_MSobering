@@ -1,0 +1,21 @@
+<div class="cell is-col-span-6">
+  <div class="grid is-gap-0 is-col-min-10">
+    <% products.each do |product| %>
+      <%= link_to product, class: "product-card-link" do %>
+        <div class="cell card is-shadowless is-radiusless m-0">
+          <div class="card-image p-5">
+            <figure class="image">
+              <%= image_tag product.image.variant(:small_display), alt: product.name %>
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="media-content">
+              <p class="title is-4"><%= product.name %></p>
+              <p class="subtitle is-6">$<%= product.price %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

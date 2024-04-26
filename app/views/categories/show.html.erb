@@ -1,0 +1,12 @@
+<section class="section">
+  <div class="grid mx-6">
+    <div class="cell is-col-span-12">
+      <h1 class="title is-1"><%= @category.name %></h1>
+      <p>There are <%= @category.products.count %> products in this category:</p>
+    </div>
+
+    <%= render "products/display_products", products: @category.products %>
+
+    <%= render "products/side_menu" %>
+  </div>
+</section>
