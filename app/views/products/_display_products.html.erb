@@ -18,6 +18,15 @@
               <div class="content">
                 <%= product.description %>
               </div>
+              <footer class="card-footer">
+                <% product.categories.each do |category| %>
+                    <p class="card-footer-item">
+                      <span>
+                        <%= category.name %>
+                      </span>
+                    </p>
+                <% end %>
+              </footer>
             <% end %>
           </div>
         </div>
