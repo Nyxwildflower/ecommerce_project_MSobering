@@ -1,6 +1,19 @@
 <div class="cell is-col-span-4 mx-6 px-6">
   <aside class="menu">
     <p class="menu-label">Search</p>
+      <%= form_with(url: search_products_path, method: "get") do |form| %>
+        <div class="field has-addons">
+          <div class="control">
+            <%= form.label :q, "Search products:", class: "is-sr-only" %>
+          </div>
+          <div class="control">
+            <%= form.text_field :q, class:"input" %>
+          </div>
+          <div class="control">
+            <%= form.submit "Search", class:"button is-info" %>
+          </div>
+        </div>
+      <% end %>
     <p class="menu-label">Categories</p>
     <ul class="menu-list">
       <% Category.all.each do |category| %>

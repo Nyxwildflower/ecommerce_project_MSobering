@@ -14,6 +14,11 @@
               <p class="title is-4"><%= product.name %></p>
               <p class="subtitle is-6">$<%= product.price %></p>
             </div>
+            <% if current_page?(controller: 'products', action: 'search') %>
+              <div class="content">
+                <%= product.description %>
+              </div>
+            <% end %>
           </div>
         </div>
       <% end %>
