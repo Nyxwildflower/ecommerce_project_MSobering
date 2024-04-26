@@ -5,7 +5,7 @@
       <p>There are <%= @category.products.count %> products in this category:</p>
     </div>
 
-    <%= render "products/display_products", products: @category.products %>
+    <%= render "products/display_products", products: @category.products.page(params[:page]) %>
 
     <%= render "products/side_menu" %>
   </div>
