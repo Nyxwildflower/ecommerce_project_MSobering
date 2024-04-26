@@ -35,6 +35,9 @@ gem "devise"
 # Use SASS variables to style the Active Admin dashboard and make specific changes to the Bulma styles.
 gem "sassc-rails"
 
+# Paginate results with Kaminari
+gem "kaminari"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
