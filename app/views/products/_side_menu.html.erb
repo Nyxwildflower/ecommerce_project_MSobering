@@ -10,6 +10,9 @@
             <%= form.text_field :q, class:"input" %>
           </div>
           <div class="control">
+            <%= form.collection_select :category_filter, Category.order(:name), :name, :name, { :include_blank => "Any" } %>
+          </div>
+          <div class="control">
             <%= form.submit "Search", class:"button is-info" %>
           </div>
         </div>
