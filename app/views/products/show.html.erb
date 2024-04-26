@@ -1,0 +1,35 @@
+<section class="section">
+  <div class="grid box m-6 px-0">
+    <div class="cell">
+      <figure class="image px-6">
+        <%= image_tag @product.image.variant(:small_display), alt: @product.name %>
+      </figure>
+    </div>
+
+    <div class="cell">
+      <div class="grid is-col-min-12">
+        <div class="cell">
+          <h1 class="title is-2 has-text-centered"><%= @product.name %></h1>
+          <% if @product.on_sale %>
+            <h2 class="subtitle is-4 has-text-success has-text-centered">$<%= @product.price - @product.price * @product.sale_percentage %></h2>
+            <p class="subtitle is-6 has-text-grey-dark has-text-centered">Usually $<%= @product.price %></p>
+          <% else %>
+            <h2 class="subtitle is-4 has-text-centered">$<%= @product.price %></h2>
+          <% end %>
+        </div>
+        <div class="cell hero is-primary">
+          <div class="hero-body">
+            <p class="title mb-4">In-Game Description:</p>
+            <p class="subtitle"><%= @product.description %></p>
+          </div>
+        </div>
+        <div class="cell p-4">
+          <p>We have <%= @product.stock_quantity %> in stock currently. If you want to order more, contact us <a href="#">here</a>.</p>
+        </div>
+        <div class="cell p-4">
+          <button class="button is-medium is-rounded">Add To Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
