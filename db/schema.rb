@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_25_022608) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_25_233125) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -120,6 +120,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_25_022608) do
     t.boolean "on_sale"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "sale_percentage"
   end
 
   create_table "provinces", force: :cascade do |t|

@@ -5,12 +5,16 @@ require "json"
 
 Category.destroy_all
 OrderItem.destroy_all
+Product.all.each do |p|
+  p.image.purge
+  sleep 1
+end
 Product.destroy_all
 Order.destroy_all
 Customer.destroy_all
 Province.destroy_all
 
-# Total time to run: ~0.5 minutes.
+# Total time to run: ~2 minutes.
 
 # I couldn't find any type of limiting option for requests to the API.
 api_urls = ["https://api.nookipedia.com/nh/fish",
@@ -50,12 +54,17 @@ api_urls.each do |url|
 
   # Limit the amount of creatures registered through a take method.
   data_creatures.take(34).each do |creature|
+    # Only set a random number for the sale percentage if the item is on sale.
+    has_sale = rand(11) < 1
+    percentage = has_sale ? rand(2..6).to_f / 100 : 0
+
     # Populate Products. The api prices are slightly ridiculous in a real life case.
-    new_product = Product.find_or_create_by!(name:           creature["name"].capitalize,
-                                             description:    creature["catchphrases"][0],
-                                             price:          creature["sell_nook"] / 10,
-                                             stock_quantity: rand(1..10),
-                                             on_sale:        rand(11) < 1)
+    new_product = Product.find_or_create_by!(name:            creature["name"].capitalize,
+                                             description:     creature["catchphrases"][0],
+                                             price:           creature["sell_nook"] / 10,
+                                             stock_quantity:  rand(1..10),
+                                             on_sale:         has_sale,
+                                             sale_percentage: percentage)
 
     # Associate the product with both of its categories.
     new_product.categories << main_category
@@ -103,4 +112,4 @@ province_table_data.each do |province|
                    hst:  hst)
 end
 
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+# AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

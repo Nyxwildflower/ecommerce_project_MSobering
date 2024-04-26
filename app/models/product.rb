@@ -11,7 +11,7 @@ class Product < ApplicationRecord
 
   # Define the attributes and associations that active admin can search.
   def self.ransackable_attributes(auth_object = nil)
-    ["image_record_id", "image_blob_id", "description", "id", "id_value", "name", "on_sale", "price", "stock_quantity", "created_at", "updated_at"]
+    ["image_record_id", "image_blob_id", "description", "id", "id_value", "name", "on_sale", "sale_percentage", "price", "stock_quantity", "created_at", "updated_at"]
   end
 
   def self.ransackable_associations(auth_object = nil)
@@ -23,4 +23,5 @@ class Product < ApplicationRecord
   validates :price, numericality: { greater_than_or_equal_to: 0.01 }
   validates :stock_quantity, numericality: { only_integer: true, greater_than: 0 }
   validates :on_sale, inclusion: [true, false]
+  validates :sale_percentage, presence: true, numericality: { in: 0..1 }
 end

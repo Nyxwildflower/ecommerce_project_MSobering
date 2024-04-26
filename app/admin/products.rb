@@ -1,5 +1,5 @@
 ActiveAdmin.register Product do
-  permit_params :name, :description, :price, :stock_quantity, :on_sale, :image, categories_attributes: [:id, :name, :_destroy]
+  permit_params :name, :description, :price, :stock_quantity, :on_sale, :sale_percentage, :image, categories_attributes: [:id, :name, :_destroy]
 
   preserve_default_filters!
   remove_filter :image_attachment, :image_blob
@@ -11,6 +11,7 @@ ActiveAdmin.register Product do
     column :price
     column :stock_quantity
     column :on_sale
+    column :sale_percentage
     column :categories do |product|
       product.categories.map { |pr| pr.name }.join(", ").html_safe
     end
@@ -24,6 +25,7 @@ ActiveAdmin.register Product do
       row :price
       row :stock_quantity
       row :on_sale
+      row :sale_percentage
       row :categories do |product|
         product.categories.map { |pr| pr.name }.join(", ").html_safe
       end
