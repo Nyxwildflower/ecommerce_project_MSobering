@@ -2,35 +2,43 @@
 <div class="cell is-col-span-6">
   <div class="grid is-gap-0 is-col-min-10">
     <% products.each do |product| %>
-      <%= link_to product, class: "product-card-link" do %>
-        <div class="cell card is-shadowless is-radiusless m-0">
-          <div class="card-image p-5">
-            <figure class="image">
-              <%= image_tag product.image.variant(:small_display), alt: product.name %>
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="media-content">
-              <p class="title is-4"><%= product.name %></p>
-              <p class="subtitle is-6">$<%= product.price %></p>
-            </div>
-            <% if current_page?(controller: 'products', action: 'search') %>
-              <div class="content">
-                <%= product.description %>
-              </div>
-              <footer class="card-footer">
-                <% product.categories.each do |category| %>
-                    <p class="card-footer-item">
-                      <span>
-                        <%= category.name %>
-                      </span>
-                    </p>
-                <% end %>
-              </footer>
+      <div class="cell card is-shadowless is-radiusless m-0">
+        <div class="card-image p-5">
+          <figure class="image">
+            <%= image_tag product.image.variant(:small_display), alt: product.name %>
+          </figure>
+        </div>
+        <div class="card-content">
+          <div class="media-content">
+            <p class="title is-4"><%= link_to product.name, product %></p>
+            <% if product.on_sale %>
+              <h2 class="subtitle is-6 has-text-success"><%= number_to_currency (product.price - product.price * product.sale_percentage) %></h2>
+              <p class="subtitle is-6 has-text-grey">Usually $<%= product.price %></p>
+            <% else %>
+              <h2 class="subtitle is-6">$<%= product.price %></h2>
+            <% end %>
+            <% if @cart.include?(product)%>
+              <p>Product in cart.</p>
+            <% else %>
+              <%= link_to 'add to cart', add_to_cart_path(product.id), data: { turbo_method: :post } %>
             <% end %>
           </div>
+          <% if current_page?(controller: 'products', action: 'search') %>
+            <div class="content">
+              <%= product.description %>
+            </div>
+            <footer class="card-footer">
+              <% product.categories.each do |category| %>
+                <p class="card-footer-item">
+                  <span>
+                    <%= category.name %>
+                  </span>
+                </p>
+              <% end %>
+            </footer>
+          <% end %>
         </div>
-      <% end %>
+      </div>
     <% end %>
   </div>
 </div>
