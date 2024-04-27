@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
     @query = params[:q]
 
     if @query.strip == ""
-      redirect_to "/"
+      redirect_to root_path
     elsif params[:category_filter].blank?
       # Search for keyword in Product names or descriptions.
       @products = Product.where('name LIKE ?', "%#{@query}%").or(Product.where('description LIKE ?', "%#{@query}%")).page(params[:page])
@@ -30,6 +30,15 @@ class ProductsController < ApplicationController
       # Count all of the products found.
       @count = @products.total_count
     end
+  end
+
+  def add_to_cart
+    id = params[:id].to_i
+    session[:cart] << id unless session[:cart].include?(id)
+    redirect_to root_path
+  end
+
+  def remove_from_cart
 
   end
 end
