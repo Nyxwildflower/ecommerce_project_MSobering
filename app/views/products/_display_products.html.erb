@@ -19,6 +19,7 @@
             <% end %>
             <% if @cart.include?(product)%>
               <p>Product in cart.</p>
+              <%= link_to 'remove from cart', remove_from_cart_path(product.id), data: { turbo_method: :delete } %>
             <% else %>
               <%= link_to 'add to cart', add_to_cart_path(product.id), data: { turbo_method: :post } %>
             <% end %>

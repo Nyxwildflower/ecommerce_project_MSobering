@@ -8,6 +8,7 @@
         <% @cart.each do |product| %>
           <div class="grid mb-0">
             <h2 class="subtitle is-5"><%= product.name %></h2>
+            <h4 class="subtitle is-6"><%= link_to 'remove', remove_from_cart_path(product.id), data: { turbo_method: :delete } %></h4>
             <p class="subtitle is-5 has-text-right"><%= number_to_currency (product.price - product.price * product.sale_percentage) %></p>
           </div>
         <% end %>
