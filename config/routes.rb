@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   # Add and remove products from the session cart.
   post 'products/add_to_cart/:id', to: 'products#add_to_cart', as: 'add_to_cart'
+  post 'products/change_quantity/:id', to: 'products#change_quantity', as: 'change_quantity'
   delete 'products/remove_from_cart/:id', to: 'products#remove_from_cart', as: 'remove_from_cart'
 
   get "/cart", to: "static_pages#cart"

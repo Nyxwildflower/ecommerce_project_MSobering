@@ -7,9 +7,13 @@
       <div class="card-content px-5">
         <% @cart.each do |product| %>
           <div class="grid mb-0">
-            <h2 class="subtitle is-5"><%= product.name %></h2>
-            <h4 class="subtitle is-6"><%= link_to 'remove', remove_from_cart_path(product.id), data: { turbo_method: :delete } %></h4>
-            <p class="subtitle is-5 has-text-right"><%= number_to_currency (product.price - product.price * product.sale_percentage) %></p>
+            <h2 class="subtitle is-5"><%= product[:product].name %></h2>
+            <h4 class="subtitle is-6"><%= link_to 'remove', remove_from_cart_path(product[:product][:id]), data: { turbo_method: :delete } %></h4>
+            <%= form_with(url: change_quantity_path(product[:product][:id])) do |f| %>
+              <%= f.text_field :quantity, value: product[:quantity] %>
+              <%= f.submit "Update" %>
+            <% end %>
+            <p class="subtitle is-5 has-text-right"><%= number_to_currency (product[:subtotal]) %></p>
           </div>
         <% end %>
         <div class="">
