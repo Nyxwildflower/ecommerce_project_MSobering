@@ -17,7 +17,7 @@
             <% else %>
               <h2 class="subtitle is-6">$<%= product.price %></h2>
             <% end %>
-            <% if @cart.include?(product)%>
+            <% if @cart.find { |el| el[:product][:id] == product.id} %>
               <p>Product in cart.</p>
               <%= link_to 'remove from cart', remove_from_cart_path(product.id), data: { turbo_method: :delete } %>
             <% else %>
