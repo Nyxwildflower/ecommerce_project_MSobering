@@ -32,15 +32,35 @@ class ProductsController < ApplicationController
     end
   end
 
-  def add_to_cart
+  def change_quantity
     id = params[:id].to_i
-    session[:cart] << id unless session[:cart].include?(id)
+    quantity = params[:quantity].to_i
+
+    # Find and return the whole array that contains the id.
+    find_array = session[:cart].find { |el| el[0] == id}
+
+    # Then search for the index of that array in the cart.
+    array_index = session[:cart].find_index(find_array)
+
+    session[:cart][array_index][1] = quantity
+    redirect_to cart_path
+  end
+
+  def add_to_cart
+    # Get the id param from the link and set the quantity to one by default.
+    id = params[:id].to_i
+    quantity = 1
+
+    session[:cart] << [id, quantity] unless session[:cart].find { |el| el[0] == id}
     redirect_to root_path
   end
 
   def remove_from_cart
     id = params[:id].to_i
-    session[:cart].delete(id)
+    # Find the index of the array that contains the specified id.
+    delete_array = session[:cart].find { |el| el[0] == id}
+
+    session[:cart].delete(delete_array)
     redirect_to root_path
   end
 end
