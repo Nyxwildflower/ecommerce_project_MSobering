@@ -1,47 +1,71 @@
-<h2>Sign up</h2>
+<section class="section px-6">
+  <div class="grid">
+    <div class="cell is-col-span-8 card p-0">
+      <header class="card-header">
+        <h2 class="card-header-title has-text-centered">Sign Up</h2>
+      </header>
+      <div class="card-content px-5">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= render "customers/shared/error_messages", resource: resource %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "customers/shared/error_messages", resource: resource %>
+          <div class="fixed-grid has-1-cols">
+            <div class="field grid">
+              <%= f.label :name, class: "cell mt-4 mb-2" %>
+              <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "cell is-col-span-1 input is-rounded" %>
+            </div>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+            <div class="field grid">
+              <%= f.label :username, class: "cell mt-4 mb-2" %>
+              <%= f.text_field :username, autocomplete: "username", class: "cell input is-rounded" %>
+            </div>
+
+            <div class="field grid">
+              <%= f.label :email, class: "cell mt-4 mb-2" %>
+              <%= f.email_field :email, autocomplete: "email", class: "cell input is-rounded" %>
+            </div>
+
+            <div class="field grid">
+              <%= f.label :address, class: "cell mt-4 mb-2" %>
+              <%= f.text_field :address, class: "cell input is-rounded" %>
+            </div>
+
+            <div class="grid">
+              <%= f.label :province_id, class: "cell mt-4 mb-2" %>
+
+              <div class="cell">
+                <div class="select">
+                  <%= f.select :province_id, Province.order(:name).map { |p| [p.name, p.id] } %>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="field grid mt-4 mb-2">
+              <div class="cell">
+                <%= f.label :password %>
+                <% if @minimum_password_length %>
+                <em>(<%= @minimum_password_length %> characters minimum)</em>
+                <% end %>
+              </div>
+
+              <%= f.password_field :password, autocomplete: "new-password", class: "cell input is-rounded" %>
+            </div>
+
+            <div class="field grid">
+              <%= f.label :password_confirmation, class: "mt-4 mb-2" %>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "cell input is-rounded" %>
+            </div>
+
+            <div class="actions my-5">
+              <%= f.submit "Sign up" %>
+            </div>
+          </div>
+
+        <% end %>
+
+        <%= render "customers/shared/links" %>
+      </div>
+    </div>
   </div>
+</section>
 
-  <div class="field">
-    <%= f.label :username %>
-    <%= f.text_field :username, autocomplete: "username" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :address %>
-    <%= f.text_field :address %>
-  </div>
-
-  <%= f.label :province_id %>
-  <%= f.select :province_id, Province.order(:name).map { |p| [p.name, p.id] } %>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %>
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "customers/shared/links" %>

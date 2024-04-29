@@ -15,8 +15,12 @@
   <body>
     <%= render 'products/header_nav' %>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% if !notice.blank? || !alert.blank? %>
+      <div class="notification is-link my-0">
+        <p class="notice has-text-centered mb-0"><%= notice %></p>
+        <p class="alert has-text-centered mb-0"><%= alert %></p>
+      </div>
+    <% end %>
 
     <%= yield %>
   </body>
