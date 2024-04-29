@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
       item_details = { :quantity => item[1], :subtotal => 0, :product => find_product }
       @cart.push(item_details)
 
-      subtotal = BigDecimal((find_product.price - find_product.price * find_product.sale_percentage) * item_details[:quantity], 2)
+      subtotal = BigDecimal(find_product.price - find_product.price * find_product.sale_percentage, 2) * BigDecimal(item_details[:quantity], 2)
       item_details[:subtotal] = subtotal
 
       # Add up total price including sales and quantities.

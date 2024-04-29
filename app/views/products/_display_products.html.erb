@@ -12,7 +12,7 @@
           <div class="media-content">
             <p class="title is-4"><%= link_to product.name, product %></p>
             <% if product.on_sale %>
-              <h2 class="subtitle is-6 has-text-success"><%= number_to_currency (product.price - product.price * product.sale_percentage) %></h2>
+              <h2 class="subtitle is-6 has-text-success"><%= number_to_currency (BigDecimal(product.price - product.price * product.sale_percentage, 2)) %></h2>
               <p class="subtitle is-6 has-text-grey">Usually $<%= product.price %></p>
             <% else %>
               <h2 class="subtitle is-6">$<%= product.price %></h2>
