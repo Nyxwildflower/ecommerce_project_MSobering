@@ -56,7 +56,7 @@ api_urls.each do |url|
   data_creatures.take(34).each do |creature|
     # Only set a random number for the sale percentage if the item is on sale.
     has_sale = rand(11) < 1
-    percentage = has_sale ? rand(2..6).to_f / 100 : 0
+    percentage = has_sale ? rand(2..6).to_f / 10 : 0
 
     # Populate Products. The api prices are slightly ridiculous in a real life case.
     new_product = Product.find_or_create_by!(name:            creature["name"].capitalize,
