@@ -2,7 +2,7 @@ class Customer < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :rememberable, :validatable
+         :validatable
   belongs_to :province
   has_many :orders
 
@@ -10,5 +10,5 @@ class Customer < ApplicationRecord
   validates :name, length: { minimum: 2 }
   validates :username, uniqueness: true, length: { minimum: 7 }
   validates :email, uniqueness: true, format: URI::MailTo::EMAIL_REGEXP
-  validates :username, format: { with: /\A[a-zA-Z0-9]+\Z/ }
+  validates :username, format: { with: /\A[a-zA-Z0-9]+\Z/, message: "can only contain letters and numbers" }
 end
