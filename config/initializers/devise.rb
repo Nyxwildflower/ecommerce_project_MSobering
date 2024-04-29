@@ -16,9 +16,6 @@ Devise.setup do |config|
   # by default. You can change it below and use your own secret key.
   # config.secret_key = '6ff655aa5602f75450047fde352b0f43c1c17724d71ba2ee7534a90dc5b16763fffe519be731a07eda7bf209a7e2e3253fbafb64f85cbef3b485f53590faffac'
 
-  # Allow for scoped views with Devise.
-  config.scoped_views = true
-
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
@@ -191,7 +188,7 @@ Devise.setup do |config|
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this
   # time the user will be asked for credentials again. Default is 30 minutes.
-  # config.timeout_in = 30.minutes
+  config.timeout_in = false
 
   # ==> Configuration for :lockable
   # Defines which strategy will be used to lock an account.
@@ -247,7 +244,7 @@ Devise.setup do |config|
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
-  # config.scoped_views = false
+  config.scoped_views = true
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).
@@ -255,7 +252,7 @@ Devise.setup do |config|
 
   # Set this configuration to false if you want /users/sign_out to sign out
   # only the current scope. By default, Devise signs out all scopes.
-  # config.sign_out_all_scopes = true
+  config.sign_out_all_scopes = false
 
   # ==> Navigation configuration
   # Lists the formats that should be treated as navigational. Formats like
