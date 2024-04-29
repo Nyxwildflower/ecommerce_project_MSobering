@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :configure_sign_up_params, if: :devise_controller?
+  before_action :configure_account_update_params, if: :devise_controller?
   before_action :initialize_cart
   before_action :load_cart
 
@@ -8,6 +9,10 @@ class ApplicationController < ActionController::Base
   def configure_sign_up_params
     attributes = [:name, :username, :email, :password, :password_confirmation, :address, :province_id]
     devise_parameter_sanitizer.permit(:sign_up, keys: attributes)
+  end
+
+  def configure_account_update_params
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :username, :email, :password, :password_confirmation, :address, :province_id])
   end
 
   private
