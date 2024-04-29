@@ -36,13 +36,16 @@ class ProductsController < ApplicationController
     id = params[:id].to_i
     quantity = params[:quantity].to_i
 
-    # Find and return the whole array that contains the id.
-    find_array = session[:cart].find { |el| el[0] == id}
+    if quantity >= 1
+      # Find and return the whole array that contains the id.
+      find_array = session[:cart].find { |el| el[0] == id}
 
-    # Then search for the index of that array in the cart.
-    array_index = session[:cart].find_index(find_array)
+      # Then search for the index of that array in the cart.
+      array_index = session[:cart].find_index(find_array)
 
-    session[:cart][array_index][1] = quantity
+      session[:cart][array_index][1] = quantity
+    end
+
     redirect_to cart_path
   end
 
