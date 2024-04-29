@@ -20,13 +20,11 @@
 
   <div class="field">
     <%= f.label :address %>
-    <%= f.text_field :address, autocomplete: "address" %>
+    <%= f.text_field :address %>
   </div>
 
-  <div class="field">
-    <%= f.label :province %>
-    <%= f.collection_select :province, Province.all.select(:id, :name), :id, :name  %>
-  </div>
+  <%= f.label :province_id %>
+  <%= f.select :province_id, Province.order(:name).map { |p| [p.name, p.id] } %>
 
   <div class="field">
     <%= f.label :password %>
