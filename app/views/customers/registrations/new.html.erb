@@ -10,27 +10,27 @@
 
           <div class="fixed-grid has-1-cols">
             <div class="field grid">
-              <%= f.label :name, class: "cell mt-4 mb-2" %>
+              <%= f.label :name, class: "cell is-col-span-1 mt-4 mb-2" %>
               <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "cell is-col-span-1 input is-rounded" %>
             </div>
 
             <div class="field grid">
-              <%= f.label :username, class: "cell mt-4 mb-2" %>
-              <%= f.text_field :username, autocomplete: "username", class: "cell input is-rounded" %>
+              <%= f.label :username, class: "mt-4 mb-2" %>
+              <%= f.text_field :username, autocomplete: "username", class: "input is-rounded" %>
             </div>
 
             <div class="field grid">
-              <%= f.label :email, class: "cell mt-4 mb-2" %>
-              <%= f.email_field :email, autocomplete: "email", class: "cell input is-rounded" %>
+              <%= f.label :email, class: "mt-4 mb-2" %>
+              <%= f.email_field :email, autocomplete: "email", class: "input is-rounded" %>
             </div>
 
             <div class="field grid">
-              <%= f.label :address, class: "cell mt-4 mb-2" %>
-              <%= f.text_field :address, class: "cell input is-rounded" %>
+              <%= f.label :address, class: "mt-4 mb-2" %>
+              <%= f.text_field :address, class: "input is-rounded" %>
             </div>
 
-            <div class="grid">
-              <%= f.label :province_id, class: "cell mt-4 mb-2" %>
+            <div class="grid my-4">
+              <%= f.label :province_id, class: "mr-4" %>
 
               <div class="cell">
                 <div class="select">
@@ -38,7 +38,6 @@
                 </div>
               </div>
             </div>
-
 
             <div class="field grid mt-4 mb-2">
               <div class="cell">
@@ -68,4 +67,3 @@
     </div>
   </div>
 </section>
-
