@@ -6,7 +6,11 @@ class Customer < ApplicationRecord
   has_many :orders
 
   def self.ransackable_attributes(auth_object = nil)
-    ["address", "created_at", "email", "id", "id_value", "name", "province_id", "updated_at", "username"]
+    ["address", "email", "id", "id_value", "name", "province_id", "username"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["orders", "province"]
   end
 
   validates :name, :email, :username, :address, presence: true
