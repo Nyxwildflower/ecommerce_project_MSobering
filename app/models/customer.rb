@@ -5,6 +5,10 @@ class Customer < ApplicationRecord
   belongs_to :province
   has_many :orders
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["address", "created_at", "email", "id", "id_value", "name", "province_id", "updated_at", "username"]
+  end
+
   validates :name, :email, :username, :address, presence: true
   validates :name, :address, length: { minimum: 2 }
   validates :username, uniqueness: true, length: { minimum: 7 }, format: { with: /\A[a-zA-Z0-9]+\Z/, message: "can only contain letters and numbers" }
