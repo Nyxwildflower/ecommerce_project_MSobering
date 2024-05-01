@@ -20,6 +20,12 @@ Rails.application.routes.draw do
 
   get "/cart", to: "static_pages#cart"
 
+  # Routes for the order process.
+  get 'orders/customer_information', to: 'orders#customer_information', as: 'customer_information'
+  get 'orders/invoice', to: 'orders#invoice', as: 'invoice'
+  get 'orders/payment_information', to: 'orders#payment_information', as: 'payment_information'
+  post 'orders/create_order', to: 'orders#create_order', as: 'create_order'
+
   resources :products, only: ['index', 'show'] do
     collection do
       get 'search'
