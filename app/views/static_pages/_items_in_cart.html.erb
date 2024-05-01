@@ -1,0 +1,61 @@
+<section class="section px-6">
+  <div class="grid">
+    <div class="cell is-col-span-8 card p-0">
+      <header class="card-header py-5">
+        <h2 class="card-header-title title is-3"><%= title %></h2>
+      </header>
+      <div class="card-content px-5">
+        <% if @cart.blank? %>
+          <h2 class="subtitle my-6 is-5 has-text-centered">There is nothing in your cart</h2>
+        <% else %>
+          <% @cart.each do |product| %>
+
+            <div class="fixed-grid has-4-cols">
+              <div class="grid">
+                <h2 class="subtitle is-5"><%= product[:product].name %></h2>
+
+                <% if current_page?(controller: 'static_pages', action: 'cart') %>
+                  <h4 class="subtitle is-6"><%= link_to 'remove', remove_from_cart_path(product[:product][:id]), data: { turbo_method: :delete } %></h4>
+
+                  <%= form_with(url: change_quantity_path(product[:product][:id])) do |f| %>
+                    <div class="field has-addons">
+                      <div class="control"><%= f.text_field :quantity, value: product[:quantity], class: "input" %></div>
+                      <div class="control"><%= f.submit "Update", class: "button is-link" %></div>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <h3 class="cell is-col-span-2 subtitle is-5 has-text-right">Quantity: <%= product[:quantity] %></h3>
+                <% end %>
+
+                <p class="subtitle is-5 has-text-right"><%= number_to_currency (product[:subtotal]) %></p>
+              </div>
+            </div>
+
+          <% end %>
+        <% end %>
+        <div class="">
+          <h3 class="subtitle is-5 has-text-right has-text-weight-bold">Subtotal: <%= number_to_currency @cart_total%></h3>
+          <% if current_page?(controller: 'static_pages', action: 'cart') %>
+            <h4 class="subtitle is-5 has-text-right has-text-weight-bold">Tax TBD</h4>
+          <% elsif current_page?(controller: 'orders', action: 'invoice') %>
+            <h4 class="subtitle is-5 has-text-right">PST: <%= number_to_currency @taxes[:pst] %></h4>
+            <h4 class="subtitle is-5 has-text-right">GST: <%= number_to_currency @taxes[:gst] %></h4>
+            <h4 class="subtitle is-5 has-text-right">HST: <%= number_to_currency @taxes[:hst] %></h4>
+            <h4 class="subtitle is-3 has-text-right has-text-weight-bold mt-6">Total: <%= number_to_currency BigDecimal(@cart_total + @taxes[:pst] + @taxes[:gst] + @taxes[:hst], 2) %></h4>
+          <% end %>
+        </div>
+      </div>
+      <footer class="card-footer p-5">
+        <% if !@cart.blank? && current_page?(controller: 'static_pages', action: 'cart') && customer_signed_in? %>
+          <%= link_to 'Checkout', customer_information_path, class: "card-footer-item" %>
+        <% elsif !@cart.blank? && current_page?(controller: 'static_pages', action: 'cart') && !customer_signed_in? %>
+          <div class="card-footer-item">
+            <%= link_to 'Sign in', new_customer_session_path %> or <%= link_to 'create an account', new_customer_registration_path %> to complete your purchase.
+          </div>
+        <% elsif !@cart.blank? && current_page?(controller: 'orders', action: 'invoice') %>
+          <%= link_to 'Payment Details', payment_information_path, class: "card-footer-item" %>
+        <% end %>
+      </footer>
+    </div>
+  </div>
+</section>
