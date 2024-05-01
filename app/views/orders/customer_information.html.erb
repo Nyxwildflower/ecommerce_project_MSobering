@@ -1,0 +1,37 @@
+<section class="section px-6">
+  <div class="grid">
+    <div class="cell is-col-span-8 card p-0">
+      <header class="card-header py-5">
+        <h2 class="card-header-title title is-3">Address Details</h2>
+      </header>
+      <div class="card-content px-5">
+        <div class="grid">
+          <div class="cell">
+            <p>Name: <%= current_customer[:name] %></p>
+          </div>
+
+          <div class="cell">
+            <p>Email: <%= current_customer[:email] %></p>
+          </div>
+
+          <div class="cell">
+            <p>Address: <%= current_customer[:address] %></p>
+          </div>
+
+          <div class="cell">
+            <p>Province: <%= Province.find(current_customer[:province_id]).name %></p>
+          </div>
+        </div>
+      </div>
+
+      <footer class="card-footer p-5">
+        <div class="card-footer-item">
+          <%= link_to 'Edit Details', edit_customer_registration_path %>
+        </div>
+        <div class="card-footer-item">
+          <%= link_to 'Continue', invoice_path %>
+        </div>
+      </footer>
+    </div>
+  </div>
+</section>

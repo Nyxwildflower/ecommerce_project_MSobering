@@ -1,0 +1,34 @@
+<section class="section px-6">
+  <div class="grid">
+    <div class="cell is-col-span-8 card p-0">
+      <header class="card-header py-5">
+        <h2 class="card-header-title title is-3">Enter Payment</h2>
+      </header>
+      <div class="card-content px-5">
+        <%= form_with url: create_order_path, data: { turbo_method: :post } do |form| %>
+          <div class="fixed-grid has-1-cols">
+            <div class="grid">
+              <%= form.label :credit_name, "Name on Card:" %>
+              <%= form.text_field :credit_name, class: "input" %>
+
+              <%= form.label :payment, "Enter Credit Card Number:" %>
+              <%= form.number_field :payment, class: "input" %>
+
+
+              <%= form.label :cvc, "Enter 3 Digit Code:" %>
+              <%= form.number_field :cvc, class: "input" %>
+
+              <%= form.label :expiry, "Expiry Date" %>
+              <%= form.datetime_local_field :expiry, class: "input" %>
+
+
+            </div>
+          </div>
+
+          <%= form.submit "Finish Order", class: "my-5  button is-link" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
