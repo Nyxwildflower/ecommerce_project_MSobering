@@ -1,8 +1,8 @@
 <section class="section px-6">
   <div class="grid">
     <div class="cell is-col-span-8 card p-0">
-      <header class="card-header">
-        <h2 class="card-header-title has-text-centered">Edit <%= resource_name.to_s.humanize %></h2>
+      <header class="card-header py-5">
+        <h2 class="card-header-title title is-3">Edit <%= resource_name.to_s.humanize %></h2>
       </header>
       <div class="card-content px-5">
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
@@ -62,11 +62,10 @@
             </div>
 
             <div class="actions my-5">
-              <%= f.submit "Update" %>
+              <%= f.submit "Update", class: "button is-warning" %>
             </div>
+          </div>
         <% end %>
-
-        <h3>Cancel my account</h3>
 
         <div class="mb-5"><%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
 

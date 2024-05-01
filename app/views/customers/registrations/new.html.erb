@@ -1,8 +1,8 @@
 <section class="section px-6">
   <div class="grid">
     <div class="cell is-col-span-8 card p-0">
-      <header class="card-header">
-        <h2 class="card-header-title has-text-centered">Sign Up</h2>
+      <header class="card-header py-5">
+        <h2 class="card-header-title title is-3">Sign Up</h2>
       </header>
       <div class="card-content px-5">
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -56,10 +56,9 @@
             </div>
 
             <div class="actions my-5">
-              <%= f.submit "Sign up" %>
+              <%= f.submit "Sign up", class: "button is-link" %>
             </div>
           </div>
-
         <% end %>
 
         <%= render "customers/shared/links" %>
