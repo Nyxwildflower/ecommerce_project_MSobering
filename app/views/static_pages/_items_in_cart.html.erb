@@ -50,7 +50,7 @@
           <%= link_to 'Checkout', customer_information_path, class: "card-footer-item" %>
         <% elsif !@cart.blank? && current_page?(controller: 'static_pages', action: 'cart') && !customer_signed_in? %>
           <div class="card-footer-item">
-            <%= link_to 'Sign in', new_customer_session_path %> or <%= link_to 'create an account', new_customer_registration_path %> to complete your purchase.
+            <p><%= link_to 'Sign in', new_customer_session_path %> or <%= link_to 'create an account', new_customer_registration_path %> to complete your purchase.</p>
           </div>
         <% elsif !@cart.blank? && current_page?(controller: 'orders', action: 'invoice') %>
           <%= link_to 'Payment Details', payment_information_path, class: "card-footer-item" %>
