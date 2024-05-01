@@ -26,10 +26,14 @@
             </div>
           </div>
           <div class="cell is-col-span-12 p-4">
-            <p>We have <%= @product.stock_quantity %> in stock currently. If you want to order more, contact us <a href="#">here</a>.</p>
+            <p class="has-text-centered">We have <%= @product.stock_quantity %> in stock currently. If you want to order more, contact us <a href="#">here</a>.</p>
           </div>
           <div class="cell is-col-span-12 p-4">
-            <%= link_to 'Add to Cart', add_to_cart_path, data: { turbo_method: :post } %>
+            <% if @cart.find { |el| el[:product][:id] == @product.id} %>
+              <p class="has-text-centered">Product in cart | <%= link_to 'Remove from cart', remove_from_cart_path(@product.id), data: { turbo_method: :delete } %></p>
+            <% else %>
+              <p class="has-text-centered"><%= link_to 'add to cart', add_to_cart_path(@product.id), data: { turbo_method: :post } %></p>
+            <% end %>
           </div>
         </div>
       </div>

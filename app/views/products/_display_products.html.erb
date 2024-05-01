@@ -20,8 +20,7 @@
                 <h2 class="subtitle is-6">$<%= product.price %></h2>
               <% end %>
               <% if @cart.find { |el| el[:product][:id] == product.id} %>
-                <p>Product in cart.</p>
-                <%= link_to 'remove from cart', remove_from_cart_path(product.id), data: { turbo_method: :delete } %>
+                <p>Product in cart | <%= link_to 'Remove from cart', remove_from_cart_path(product.id), data: { turbo_method: :delete } %></p>
               <% else %>
                 <%= link_to 'add to cart', add_to_cart_path(product.id), data: { turbo_method: :post } %>
               <% end %>
